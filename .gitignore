@@ -1,0 +1,31 @@
+tmp/**
+**/*.tmp
+.bin/**
+**/*.sh
+**/*.old
+**/.tags*
+**/*fuse*
+**/*.log
+logs/**
+nohup*
+
+# node
+node_modules/
+
+# cached
+.sass-cache
+
+# sublime
+*.sublime-workspace
+*.sublime-project
+
+students/**
+
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
