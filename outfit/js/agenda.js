@@ -22,12 +22,10 @@ function init(){
 function attachEvents(){
     // onclick to themes/sub-themes titles:
     let titleNodes = document.querySelectorAll('.themes>article>h2, .themes>article h3');
-    // console.log("titleNodes:", titleNodes);
     for (let i = 0; i < titleNodes.length; i++) {
         let element = titleNodes[i];
         element.addEventListener( "click", function(){
             // showHideNodes(this.nextElementSibling)
-            // console.log("THIS:", this);
             showHideNodes(getNextSiblings(this));
         });
     };
@@ -43,7 +41,6 @@ function attachEvents(){
 
     // onclick to toggleSubThemes button
     let toggleSubThemesNodes = document.querySelectorAll('.toggleSubThemes');
-    // console.log("toggleSubThemesNodes:", toggleSubThemesNodes);
     for (let i = 0; i < toggleSubThemesNodes.length; i++) {
         let element = toggleSubThemesNodes[i];
         element.addEventListener( "click", function(){
@@ -128,7 +125,6 @@ function calcTotalHours(){
     for (let i = 0; i < hours_nodes.length; i++) {
         let theme_hours = hours_nodes[i].innerHTML*1 || 0; // cause of NaN
         total += theme_hours;
-        // console.log("total hours=", total);
     };
     out_node.innerHTML = total;
 }
@@ -184,7 +180,6 @@ function hideAllNodes ( effected_nodes){
     };
 }
 function showHideNodes(effected_nodes){
-    // console.log('showHideNode - effected_nodes:'+effected_nodes);
     effected_nodes.forEach( function(effected_node){
         if ( effected_node.classList.contains("hidden") ){
             showNode(effected_node);
@@ -196,7 +191,6 @@ function showHideNodes(effected_nodes){
     });
 }
 function showNode(effected_node){
-    // console.log("showNode IN: effected_node", effected_node);
     // show node
     // effected_node.style.display = 'block';
     effected_node.classList.remove("hidden");
@@ -205,11 +199,9 @@ function showNode(effected_node){
     effected_node.parentElement.getElementsByTagName("h3")[0].title = 'Hide Subtopics';
     // change arrow
     let arr_node = effected_node.parentElement.getElementsByTagName("h3")[0];
-    // console.log("arr_node:", arr_node);
     changeArrow( arr_node, 'up');
 };
 function hideNode (effected_node) {
-    // console.log("hideNode IN: effected_node", effected_node);
     // hide node
     // effected_node.style.display = 'none';
     effected_node.classList.add("hidden");
@@ -218,7 +210,6 @@ function hideNode (effected_node) {
     effected_node.parentElement.getElementsByTagName("h3")[0].title = 'Show Subtopics';
     // change arrow
     let arr_node = effected_node.parentElement.getElementsByTagName("h3")[0];
-    // console.log("arr_node:", arr_node);
     changeArrow( arr_node, 'down');
 }
 function changeArrow ( node, direction ) {
