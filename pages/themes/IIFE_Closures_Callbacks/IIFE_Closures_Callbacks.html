@@ -75,7 +75,7 @@
 <section><h2>Immediately-invoked function expressions (IIFE)</h2>
 	<section>
 		<h3><abbr>IIFE</abbr><dfn id="IIFE"><span>Immediately</span><span>Invoked</span><span>Function</span><span>Expression</span></dfn></h3>
-		<p>When a function will be used only once, we do not need to define it first. It's more efficient to invoke it as an anonymous function</p>
+		<p>Used to scope all variables and not to pollute the global scope (namespace)</p>
 	</section>
 	<section>
 		<pre><code rel="JS">
@@ -229,7 +229,7 @@
 			}
 		</code></pre>
 	</section>
-	<section><h3>Infinite timeout loop</h3>
+	<section><h3>Infinite timeout loop over array</h3>
 		<pre><code rel="JS" class="js">
 			var colors = ['red', 'green', 'blue'],
 				i = 0;
