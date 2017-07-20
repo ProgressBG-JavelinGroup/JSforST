@@ -44,7 +44,7 @@
 ##################### SLIDES START #####################
 ########################################################
 -->
-<section><h1>Functions and Function Expressions</h1></section>
+<section><h1>IIFE, Closures, Callbacks</h1></section>
 <section data-transition="zoom">
 	<section>
 		<div class="copyright">
@@ -72,229 +72,210 @@
 </section>
 
 
-<section><h2>Defining Functions</h2>
-	<section><h3>Function declaration</h3>
+<section><h2>Immediately-invoked function expressions (IIFE)</h2>
+	<section>
+		<h3><abbr>IIFE</abbr><dfn id="IIFE"><span>Immediately</span><span>Invoked</span><span>Function</span><span>Expression</span></dfn></h3>
+		<p>When a function will be used only once, we do not need to define it first. It's more efficient to invoke it as an anonymous function</p>
+	</section>
+	<section>
 		<pre><code rel="JS">
-			function add(x,y){
-				return x+y
-			}
+			( function(){} )();
 		</code></pre>
 		<dl class="fa">
-			<dt>Semicolons are note required after function declaration!</dt>
+			<dt><code>function(){}</code> is an anonymous function declaration!</dt>
+			<dt><code>( function(){} )</code> is an anonymous function expression!</dt>
+			<dt>We can only invoke <span class="note">function expressions</span>.</dt>
 		</dl>
 	</section>
-	<section><h3>Function expression</h3>
+	<section>
 		<pre><code rel="JS">
-			var add = function(x,y){
-				return x+y
-			}
+			(function(x,y){
+				console.log( x+y );
+			})(2,3);
 		</code></pre>
-		<dl class="fa">
-			<dt>function name can be omitted in function expressions to create anonymous functions</dt>
-			<dt>a function expression can be immediately invoked (as IIFE - discussed in next sections)</dt>
-		</dl>
-	</section>
-	<section><h3>Function expression</h3>
+		<p>is the same as</p>
 		<pre><code rel="JS">
-			var f = function add(x,y){
-				return x+y
-			}
-
-			console.log("f(2,3):", f(2,3));     // f(2,3):5
-			console.log("add(2,3):", add(2,3)); // ReferenceError: add is not defined
+			(function(x,y){
+				console.log( x+y );
+			}(2,3));
 		</code></pre>
-		<dl class="fa">
-			<dt>A function name can be given in function expression. But the function name is scoped to function body! Could be useful for debugging purposes.</dt>
-		</dl>
-	</section>
-	<section><h3>Parameters</h3>
-		<dl class="fa">
-			<dt>No matter if the function is declared or defined by expression it can take parameters - a list of identifiers, separated by comma (,)</dt>
-		</dl>
-		<pre><code rel="JS" class="js">
-			// x, y are the sum() parameters
-			function sum(x,y){
-				return x+y;
-			}
-
-			// x, y are the sum() parameters
-			var sum = function(x,y){
-				return x+y;
-			}
-		</code></pre>
-	</section>
-	<section><h3>Function Constructor</h3>
-		<p class="note">Not recommended to use.</p>
-		<dl class="fa">
-			<dt>The Function constructor creates a new Function object.</dt>
-			<dt>In JavaScript every function is actually a Function object.</dt>
-			<dt>Invoking the Function constructor as a function (without using the new operator) has the same effect as invoking it as a constructor.</dt>
-		</dl>
-		<pre><code rel="Syntax" class="js">
-			new Function ([arg1[, arg2[, ...argN]],] functionBody)
-		</code></pre>
-	</section>
-	<section><h3>Conditional function definition</h3>
-		<p>the strict ES2015 behaviour</p>
-		<pre><code rel="JS">
-			if (0){
-				function add(x,y){
-					 x+y;
-				};
-			};
-
-			console.log("add:", add); // undefined
-		</code></pre>
-		<p class="note">Not browser compatible! Some older browser would defined the function.</p>
-	</section>
-	<section><h3>Conditional function definition</h3>
-		<p>Safer way:</p>
-		<pre><code rel="JS">
-			var add;
-			if (0){
-				add = function(x,y){
-					 x+y;
-				};
-			};
-
-			console.log("add:", add);
-		</code></pre>
-	</section>
-	<section><h3>Expression vs. declaration</h3>
-		<dl class="fa">
-			<dt>Hoisting</dt>
-			<dd>Function declarations are hoisted</dd>
-			<dd>Function expressions are <span class="note">not</span>  hoisted</dd>
-		</dl>
-	</section>
-	<section><h3>Why not to use the Function constructor</h3>
-	<dl class="fa">
-		<dt>Parsing</dt>
-		<dd>Functions defined by <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function constructor</a> are parsed each time the constructor is called.</dd>
-		<dd>Functions defined by function expressions and function declarations are parsed only once.</dd>
-		<dt>Closure</dt>
-		<dd>Functions created by the Function constructor do not create closures.</dd>
-		<dd>Functions defined by function expressions and function declarations create closure to their creation context.</dd>
-	</dl>
 	</section>
 </section>
 
-<section><h2>Function Invocation</h2>
+<section><h2>Closures</h2>
 	<section>
 		<dl class="fa">
-			<dt class="note">Defining a function does not execute it!</dt>
-			<dt>Only calling (invoking) the function actually performs the specified actions</dt>
-			<dt>When invoked, a function can be passed a list of arguments, which will initialize the function parameters.</dt>
-			<dt>The first parameter will take the value of the first argument, and so on.</dt>
+			<dt>Allows a function which is executed outside its lexical scope, to preserve the values of scoped variables</dt>
 		</dl>
-	</section>
-	<section>
-		<pre><code rel="JS" class="js">
-				function sum(x,y){
-					// this is how the arguments are passed to parameters:
-					// var x = 2
-					// var y = 3
-
-					return x+y;
+		<pre><code rel="JS">
+			function outer(){
+				var x = 5;
+				function inner(){
+					console.log(x);
 				}
 
-				sum(2,3);
-		</code></pre>
-	</section>
-	<section>
-		<dl class="fa">
-			<dt>No error is raised, if the number of arguments did not correspond to the number of parameters.<span class="note">But such case are potential bug sources!</span></dt>
-			<dt>If we pass less arguments, the rest of parameters will be initialized by 'undefined'</dt>
-			<dt>If more arguments are passed, the redundant arguments are just ignored </dt>
-		</dl>
-	</section>
-	<section>
-		<pre><code rel="JS" class="js">
-			function sum(x,y){
-				// var x = 2
-				// var y = undefined
-				return x+y;
+				return inner;
 			}
 
-			sum(2);
-			// NaN (Not A Number)
+			var f = outer();
+			f(); // f can access the local x !
 		</code></pre>
 	</section>
-	<section>
-		<pre><code rel="JS" class="js">
-			function sum(x,y){
-				// var x = 1
-				// var y = 2
-				return x+y;
-			}
-
-			sum(1,2,5);
-			// returns 3, the third argument (5) is just ignored
-		</code></pre>
-	</section>
-</section>
-
-<section><h2>Functions as first-class citizens</h2>
-	<section>
-		<p>From its creation back in 1995, JavaScript supports function as <span class="note">first-class</span> citizens (objects)</p>
-	</section>
-	<section>
-		<blockquote cite="http://javascript.crockford.com/javascript.html">JavaScript's C-like syntax, including curly braces and the clunky for statement, makes it appear to be an ordinary procedural language. This is misleading because <span class="note"> JavaScript has more in common with functional languages like Lisp or Scheme</span> than with C or Java</blockquote>
-		<a href="http://javascript.crockford.com/javascript.html">JavaScript: The World's Most Misunderstood Programming Language (Douglas Crockford)</a>
-	</section>
-	<section>
-	   <dl class="fa">
-		   <dt>What that means?</dt>
-		   <dd>A function can be treated as object, expression or statement.</dd>
-		   <dd>A function can be passed as argument to other functions.</dd>
-		   <dd>A function can be the return value of the <code>return</code> operator.</dd>
-
-	   </dl>
-   </section>
-   <section><h3>example</h3>
-		<p>function passed as argument to other functions.</p>
+	<section><h3>Common problem: "closures in loops"</h3>
 		<pre><code rel="JS">
-			var greeting = function(){
-				alert("Welcome");
+			var cats = [];
+
+			for (var i = 0; i < 3; i++) {
+				cats[i] = function(){
+					console.log(`Cat ${i} is ready!`);
+				}
 			}
 
-			setTimeout(greeting, 4000);
+			cats[0](); //Cat 3 is ready!
+			cats[1](); //Cat 3 is ready!
+			cats[2](); //Cat 3 is ready!
 		</code></pre>
-   </section>
-   <section><h3>example</h3>
-		<p>function as return value</p>
+
+		<p class="note">the value of 'i' in the cats[i] function body is determined when the function is invoked!</p>
+	</section>
+	<section><h3>"closures in loops" - IIFE solution</h3>
 		<pre><code rel="JS">
-			var greeting = function(name){
+			var cats = [];
+
+			for (var i = 0; i < 3; i++) {
+				(function(i){
+					cats[i] = function(){
+						console.log(`Cat ${i} is ready!`);
+					}
+				})(i)
+			}
+
+			cats[0](); //Cat 0 is ready!
+			cats[1](); //Cat 1 is ready!
+			cats[2](); //Cat 2 is ready!
+		</code></pre>
+	</section>
+	<section><h3>"closures in loops" - Factory solution</h3>
+		<pre><code rel="JS">
+			var cats = [];
+
+			function catMaker(i){
 				return function(){
-					alert("Welcome, "+ name);
+					console.log(`Cat ${i} is ready!`);
 				}
 			}
 
-			setTimeout(greeting("iva"), 4000);
-	   </code></pre>
-   </section>
-   <section><h3>example</h3>
-		<p class="advanced"><a href="https://en.wikipedia.org/wiki/Currying">currying</a></p>
-		<pre><code rel="JS">
-			var sum = function(x){
-				return function(y){
-					return x+y;
-				}
+			for (var i = 0; i < 3; i++) {
+				cats[i] = catMaker(i);
 			}
-			console.log( "sum:", sum(2)(3) );
-	   </code></pre>
-	   <a href=""></a>
-   </section>
-   <section><h3>Pros and Cons</h3>
-		<dl class="fa">
-			<dt>Pros</dt>
-			<dd>The new (ES2015) arrow functions syntax make JavaScript a language suited for lamdba-calculus (functional programming paradigm)</dd>
-			<dt>Cons</dt>
-			<dd>Not intuitive for persons used with classical procedural languages.</dd>
-		</dl>
-   </section>
+
+			cats[0](); //Cat 0 is ready!
+			cats[1](); //Cat 1 is ready!
+			cats[2](); //Cat 2 is ready!
+		</code></pre>
+	</section>
+	<section><h3>"closures in loops - timeout Problem"</h3>
+		<pre><code rel="JS">
+			var colors = ["red", "green", "blue"];
+
+			for (var i = 0; i < colors.length; i++) {
+				setTimeout(function(){
+					changeBG("box", colors[i]);
+				}, 1000)
+			}
+
+			function changeBG(id, color){
+				var node = document.getElementById(id);
+				node.style.background = color;
+			}
+		</code></pre>
+	</section>
+	<section><h3>"closures in loops - timeout IIFE fix"</h3>
+		<pre><code rel="JS">
+			var colors = ["red", "green", "blue"];
+
+			for (var i = 0; i < colors.length; i++) {
+				(function(i){
+					setTimeout(function(){
+						changeBG("box", colors[i]);
+					}, 1000*i)
+				})(i);
+			}
+
+			function changeBG(id, color){
+				var node = document.getElementById(id);
+				node.style.background = color;
+			}
+		</code></pre>
+		<p class="note">setTimeout() is invoked immediately 3 times. The delay is for the inner function. If we pass same delay, they will be invoked simultaneously after the delay. So, we need to change the delay, as well, i.e. <code>i*1000</code></p>
+	</section>
+	<section><h3>"closures in loops - timeout separate call fix"</h3>
+		<pre><code rel="JS">
+			var colors = ["red", "green", "blue"];
+
+			for (var i = 0; i < colors.length; i++) {
+				doTimeout(i);
+			}
+
+			function doTimeout(i){
+				setTimeout(function(){
+					changeBG("box", colors[i]);
+				}, i*1000)
+			}
+
+			function changeBG(id, color){
+				var node = document.getElementById(id);
+				node.style.background = color;
+			}
+		</code></pre>
+	</section>
+	<section><h3>Infinite timeout loop</h3>
+		<pre><code rel="JS" class="js">
+			var colors = ['red', 'green', 'blue'],
+				i = 0;
+
+			function DoSomethingWithColor(color){
+				// do something with a color
+				console.log(`color = ${color}`);
+			}
+
+			function startTimer () {
+				DoSomethingWithColor(colors[i]);
+
+				i = ++i%colors.length;
+				setTimeout(startTimer, 1000);
+			}
+
+			startTimer();
+		</code></pre>
+	</section>
+	<section><h3>Test it!</h3>
+		<iframe height='328' scrolling='no' title='Lab5: All Examples' src='https://codepen.io/ProgressWWWCourses/embed/JNydxy/?height=328&theme-id=0&default-tab=js&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/ProgressWWWCourses/pen/JNydxy/'>Lab5: All Examples</a> by Iva E. Popova (<a href='http://codepen.io/ProgressWWWCourses'>@ProgressWWWCourses</a>) on <a href='http://codepen.io'>CodePen</a>.
+		</iframe>
+	</section>
 </section>
 
+<section><h2>Callback</h2>
+	<section>
+		<dl class="fa">
+			<dt>A callback function is a function passed as an argument to another function, in order to complete some kind of routine or action.</dt>
+		</dl>
+	</section>
+	<section>
+		<pre><code rel="JS" class="js">
+			function mainFunction( cb ){
+				console.log('mainFunction() is invoked');
+				cb();
+			}
+
+			function callback() {
+				console.log('callback() is invoked');
+			}
+
+			mainFunction( callback);
+		</code></pre>
+	</section>
+</section>
 
 <section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
 	 <p>These slides are based on</p>

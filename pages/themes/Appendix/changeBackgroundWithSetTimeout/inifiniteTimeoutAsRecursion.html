@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>changeBackgroundWithSetTimeout</title>
+</head>
+<body>
+	<button id="stop">Stop</button>
+</body>
+<script type="text/javascript">
+	var colors = ['red', 'green', 'blue'],
+		i = 0;
+
+	function DoSomethingWithColor(color){
+		// do something with a color
+		console.log(`color = ${color}`);
+	}
+
+	function startTimer () {
+		DoSomethingWithColor(colors[i]);
+
+		i = ++i%colors.length;
+		setTimeout(startTimer, 1000);
+	}
+
+	startTimer();
+</script>
+</html>
