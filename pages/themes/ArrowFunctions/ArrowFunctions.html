@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>ArrowFunctions</title>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+	<!-- css & themes include -->
+	<link rel="stylesheet" href="../../../lib/reveal.js/css/reveal.css">
+	<link rel="stylesheet" href="../../../outfit/css/themes/projector.css" id="theme">
+	<!-- Printing and PDF exports -->    <script>        var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? '../../../lib/reveal.js/css/print/pdf.css' : '../../../lib/reveal.js/css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+	<!-- CUSTOM -->
+	<base target="_blank">
+</head>
+<body>
+	<div class="reveal default center" data-transition-speed="default" data-background-transition="default">
+		<div class="top_links">
+			<a class="home_link" href="/index.html#Course_Intro" target="_top"><i class="fa fa-home"></i></a>
+			<span class="help_link" href="#"><i class="fa fa-question"></i></span>
+			<div class="help_text">
+				<div><span>N/Space</span><span>Next Slide</span></div>
+				<div><span>P</span><span>Previous Slide</span></div>
+				<div><span>O</span><span>Slides Overview</span></div>
+				<div><span>ctrl+left click</span><span>Zoom Element</span></div>
+			</div>
+		</div>
+		<div class="footer theme_switch">
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/dark.css'); return false;">Dark</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/light.css'); return false;">Light</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/projector.css'); return false;">Projector</a>
+		</div>
+		<div class="slides">
+<!--
+########################################################
+##################### SLIDES START #####################
+########################################################
+-->
+<section><h1>Arrow Functions in JavaScript</h1></section>
+<section data-transition="zoom">
+	<section>
+		<div class="copyright">
+			<div class="note">
+				<p>Created for</p>
+			</div>
+			<div class="company">
+				<a href="http://www.javelingroup.com/">
+					<img src="../../../outfit/images/for_slides/JavelinLogo.png" alt="JavelinGroup" style="border-radius: 100%">
+				</a>
+			</div>
+		</div>
+	</section>
+	<section class="copyright" data-transition="zoom" style="margin-top: -2em;">
+		<div class="note">
+			<p>Created by</p>
+		</div>
+		<div class="company">
+			 <div class="LI-profile-badge"  data-version="v1" data-size="large" data-locale="en_US" data-type="vertical" data-theme="dark" data-vanity="ivapopova"><a class="LI-simple-link" href='https://bg.linkedin.com/in/ivapopova?trk=profile-badge'>Iva E. Popova</a></div>
+		</div>
+		<!-- <div class="author">
+			<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
+		</div> -->
+	</section>
+</section>
+
+
+<section><h2>What Are Arrow Functions?</h2>
+	<section><h3></h3>
+		<p>Also called "fat arrow" (coming from from CoffeeScript)</p>
+		<p>or "arrow notation" as in ES6</p>
+	</section>
+	<section>
+		<p>A more concise syntax for writing function expressions</p>
+		<pre><code rel="JS" class="js">
+			var isEven = x=>x%2 == 0;
+			console.log( isEven(3));
+		</code></pre>
+	</section>
+	<section>
+		<p>It is essentially syntactic sugar that reduces the number of times you have to type the word function , as well as the number of curly braces you have to type</p>
+	</section>
+	<section><h3>Function expression vs arrow syntax:</h3>
+        <pre><code rel="JS">
+            const pi = 3.14;
+
+            // function expression:
+            let circleAreaExp = function(r){
+                return r*r*pi;
+            }
+
+            // arrow function:
+            let circleAreaArr = r=>r*r*pi;
+        </code></pre>
+    </section>
+	<section>
+		<p>Arrow functions are always anonymous.</p>
+		<pre><code rel="JS" class="js">
+			btnNode.addEventListener('click', event=>{
+				console.log('Button was clicked!');
+			})
+		</code></pre>
+	</section>
+	<section>
+		<p>Arrow Functions have different rules for <code>this</code> value - it is always the this value of the enclosing execution context.</p>
+	</section>
+	<section><p class="note">Arrow Functions was introduces in ES6!</p></section>
+</section>
+<section><h2>syntax</h2>
+	<section>
+        <pre><code rel="Basic Syntax">
+            (param1, param2, …, paramN) => { statements }
+        </code></pre>
+        <pre><code rel="JS">
+            let circleArea = (r)=>{return r*r*pi};
+
+            console.log(`circleArea(2) = ${circleArea(2)}`);
+        </code></pre>
+    </section>
+    <section><h3>omitting parentheses</h3>
+        <dl class="fa">
+            <dt>If the function takes a single argument, you can omit the parentheses</dt>
+        </dl>
+        <pre><code rel="Basic Syntax">
+            singleParam => { statements }
+        </code></pre>
+        <pre><code rel="JS">
+            let circleArea = r=>{return r*r*pi};
+
+            console.log(`circleArea(2) = ${circleArea(2)}`);
+        </code></pre>
+    </section>
+    <section><h3>omitting curly braces</h3>
+        <dl class="fa">
+            <dt>If the function body is a single expression, you can omit curly braces <span class="note">and the return statement</span></dt>
+        </dl>
+        <pre><code rel="Basic Syntax">
+            (param1, param2, …, paramN) => expression
+        </code></pre>
+        <pre><code rel="JS">
+            let circleArea = r=>r*r*pi;
+
+            console.log(`circleArea(2) = ${circleArea(2)}`);
+        </code></pre>
+    </section>
+</section>
+<section><h2>the THIS value</h2>
+	<section>
+		<dl class="fa">
+			<dt>Traditional functions have a dynamic this; its value is determined by how they are called.</dt>
+			<dt>Arrow functions have a lexical this; its value is determined by the surrounding scope.</dt>
+			<dt>"this" in arrow functions can not be changed with <code>call/apply or bind</code> methods!</dt>
+		</dl>
+	</section>
+    <section><h3>lexical "this" - example</h3>
+        <pre><code rel="JS">
+            lexicalThis = this;
+
+            var obj = {
+                'exp': function(){
+                    console.log(this === lexicalThis);
+                },
+                'arr': ()=>{console.log(this === lexicalThis)}
+            }
+
+
+            obj.exp(); // false
+            obj.arr(); // true
+        </code></pre>
+    </section>
+    <section><h3>lexical arguments</h3>
+        <dl class="fa">
+            <dt>the <code>arguments</code> object in arrow function is reference to the arguments object in the enclosing scope</dt>
+        </dl>
+        <pre><code rel="JS">
+            let logArgs = ()=>{
+                for (var i = 0; i < arguments.length; i++) {
+                    console.log(arguments[i]);
+                }
+                console.dir(arguments);
+            }
+
+            logArgs(1,2,3);
+        </code></pre>
+    </section>
+</section>
+<section><h2>loose binding</h2>
+    <pre><code rel="JS">
+        const f = x => (x % 2) === 0 ? x : 0;
+        console.log(f(6));
+    </code></pre>
+    <pre><code rel="JS">
+        let cb;
+
+        cb = cb || function() {}; // ok
+
+        cb = cb || () => {};
+        // SyntaxError: invalid arrow-function arguments
+
+        cb = cb || (() => {});    // ok
+    </code></pre>
+</section>
+<section><h2>Notes</h2>
+    <dl class="fa">
+        <dt class="note">Arrow functions are always anonymous!</dt>
+        <dt>Arrow function syntax is best suited for non-method functions</dt>
+        <dt>Perfect for callbacks</dt>
+        <dt>Arrow functions cannot be used as constructors and will throw an error when used with new</dt>
+    </dl>
+</section>
+
+
+
+
+<section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
+	 <p>These slides are based on</p>
+	 <p>customised version of </p>
+	 <p><a href="http://hakim.se/">Hakimel</a>'s <a href="http://lab.hakim.se/reveal-js">reveal.js</a></p>
+	 <p>framework</p>
+</section>
+<!--
+########################################################
+##################### SLIDES END   #####################
+########################################################
+-->
+		</div>
+	</div>
+	<!-- Custom processing -->
+	<script src="../../../outfit/js/slides.js"></script>
+	<!-- external scripts -->
+	<script src="../../../lib/reveal.js/lib/js/head.min.js"></script>
+	<script src="../../../lib/reveal.js/js/reveal.js"></script>
+
+	<!-- init reveal -->
+	<script>
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		var highlightjsTabSize = '  ';
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			slideNumber: 'c/t',
+			keyboard: true,
+			history: true,
+
+			// display control
+			// center: true,
+			// width: '100%',
+			// height: '100%',
+			// // Factor of the display size that should remain empty around the content
+			// margin: 0.1,
+
+			// The "normal" size of the presentation, aspect ratio will be preserved
+			// when the presentation is scaled to fit different resolutions. Can be
+			// specified using percentage units.
+			width: 960,
+			height: 700,
+
+			// Factor of the display size that should remain empty around the content
+			margin: 0.1,
+
+			// Bounds for smallest/largest possible scale to apply to content
+			minScale: 0.2,
+			maxScale: 1.5,
+
+			// slide transition
+			transition: 'concave', // none/fade/slide/convex/concave/zoom
+			// shift+maous click to zoom in/out element
+			zoomKey: 'ctrl',
+			// theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+			// transition: Reveal.getQueryHash().transition || 'default'
+			// Optional reveal.js plugins
+			dependencies: [
+				{ src: '../../../lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				{ src: '../../../lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../../lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../../lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.configure({tabReplace: highlightjsTabSize}); hljs.initHighlightingOnLoad(); } },
+				{ src: '../../../lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
+				{ src: '../../../lib/reveal.js/plugin/notes/notes.js', async: true }
+			]
+		});
+	</script>
+	<!-- linkedin badge -->
+	<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+</body>
+</html>
