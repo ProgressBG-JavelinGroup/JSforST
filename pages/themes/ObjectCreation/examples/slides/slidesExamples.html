@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>slidesExamples</title>
+</head>
+<body>
+
+<script type="text/javascript">
+	var examples = {
+		'example1': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			var objFactory = function(name){
+				var obj = {};
+
+				obj.name = name;
+				obj.sayName = function(){
+					console.log(`I'm object: ${obj.name}`)
+				};
+
+				return obj;
+			}
+
+			var obj1 = objFactory('Object 1');
+			var obj2 = objFactory('Object 2');
+			obj1.sayName();
+			obj2.sayName();
+			// I'm object: Object 1
+			// I'm object: Object 2
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'example2': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			var CarConstructor = function(model, year){
+				this.model = model;
+				this.year = year;
+			}
+
+			var ford = new CarConstructor('Ford', 2000);
+			var bmw = new CarConstructor('BMW', 2005);
+
+			console.dir(ford);
+			console.dir(bmw);
+
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+	}
+
+	examples.example2();
+</script>
+</body>
+</html>

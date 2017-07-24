@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>ObjectCreation</title>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+	<!-- css & themes include -->
+	<link rel="stylesheet" href="../../../lib/reveal.js/css/reveal.css">
+	<link rel="stylesheet" href="../../../outfit/css/themes/projector.css" id="theme">
+	<!-- Printing and PDF exports -->    <script>        var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? '../../../lib/reveal.js/css/print/pdf.css' : '../../../lib/reveal.js/css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+	<!-- CUSTOM -->
+	<base target="_blank">
+</head>
+<body>
+	<div class="reveal default center" data-transition-speed="default" data-background-transition="default">
+		<div class="top_links">
+			<a class="home_link" href="/index.html#Course_Intro" target="_top"><i class="fa fa-home"></i></a>
+			<span class="help_link" href="#"><i class="fa fa-question"></i></span>
+			<div class="help_text">
+				<div><span>N/Space</span><span>Next Slide</span></div>
+				<div><span>P</span><span>Previous Slide</span></div>
+				<div><span>O</span><span>Slides Overview</span></div>
+				<div><span>ctrl+left click</span><span>Zoom Element</span></div>
+			</div>
+		</div>
+		<div class="footer theme_switch">
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/dark.css'); return false;">Dark</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/light.css'); return false;">Light</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/projector.css'); return false;">Projector</a>
+		</div>
+		<div class="slides">
+<!--
+########################################################
+##################### SLIDES START #####################
+########################################################
+-->
+<section><h1>Object Creation in JavaScript</h1></section>
+<section data-transition="zoom">
+	<section>
+		<div class="copyright">
+			<div class="note">
+				<p>Created for</p>
+			</div>
+			<div class="company">
+				<a href="http://www.javelingroup.com/">
+					<img src="../../../outfit/images/for_slides/JavelinLogo.png" alt="JavelinGroup" style="border-radius: 100%">
+				</a>
+			</div>
+		</div>
+	</section>
+	<section class="copyright" data-transition="zoom" style="margin-top: -2em;">
+		<div class="note">
+			<p>Created by</p>
+		</div>
+		<div class="company">
+			 <div class="LI-profile-badge"  data-version="v1" data-size="large" data-locale="en_US" data-type="vertical" data-theme="dark" data-vanity="ivapopova"><a class="LI-simple-link" href='https://bg.linkedin.com/in/ivapopova?trk=profile-badge'>Iva E. Popova</a></div>
+		</div>
+		<!-- <div class="author">
+			<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
+		</div> -->
+	</section>
+</section>
+
+
+<section><h2>Objects in JavaScript</h2>
+	<p>See <a href="/pages/themes/ReferenceTypesOverview/ReferenceTypesOverview.html#Objects/">Objects in JavaScript</a></p>
+</section>
+<section id="ObjectLiteral"><h2>Object Literal Pattern</h2>
+	<section id="objectLiteral" style="font-size: .8em"><h3>Object Literal (object initializer)</h3>
+		<dl class="fa">
+			<dt>An object literal, also known as object initializer, is a <span class="note">comma-delimited</span> list of zero or more <span class="note">pairs of property names and associated values</span> of an object, enclosed in curly braces <code class="note">{}</code>.</dt>
+		</dl>
+		<pre><code rel="Syntax" class="js">
+			var obj = {
+				property1: value1,
+				property2: value2,
+				...
+				propertyN: valueN
+			};
+		</code></pre>
+		<dl class="fa">
+			<dt>The value of a property can by any JS data type: a primitive, function or an object</dt>
+		</dl>
+		<p class="advanced ">By object literals in JavaScript, we can create <a href="https://en.wikipedia.org/wiki/Associative_array">associative arrays/dictionaries</a> data structures.</p>
+	</section>
+	<section><h3>Object Literal example</h3>
+		<pre><code rel="JS">
+			var apple = {
+				color: "red",
+				price: [23.5, 22, 25],
+
+				calcMinPrice: function(){
+					return  Math.min( ...this.price ); // from ES6
+				},
+				calcMaxPrice: function(){
+					return  Math.max( ...this.price ); // from ES6
+				}
+			}
+
+			console.log( "apple object", apple );
+			console.log( "apple min price", apple.calcMinPrice() );
+		</code></pre>
+	</section>
+	<section><h3>Object Literal: Pros&Cons</h3>
+		<dl class="fa">
+			<dt>Pros</dt>
+			<dd>Simple and clear syntax for one instance</dd>
+			<dt>Cons</dt>
+			<dd>To much "copy-paste" syntax for multitude instances</dd>
+		</dl>
+	</section>
+</section>
+<section><h2>The Factory Pattern</h2>
+	<section><h3>Overview</h3>
+		<p>"Factory" - a function which creates object instances!</p>
+		<pre><code rel="JS" class="js">
+			var carFactory = function(model, year){
+				var obj = {};
+
+				obj.model = model;
+				obj.year = year;
+
+				return obj;
+			}
+		</code></pre>
+	</section>
+	<section><h3>Factory Pattern - simple example</h3>
+		<pre><code rel="JS" class="js">
+			var objFactory = function(name){
+				var obj = {};
+
+				obj.name = name;
+				obj.sayName = function(){
+					console.log(`I'm object: ${obj.name}`)
+				};
+
+				return obj;
+			}
+
+			var obj1 = objFactory('Object 1');
+			var obj2 = objFactory('Object 2');
+			obj1.sayName();
+			obj2.sayName();
+			// I'm object: Object 1
+			// I'm object: Object 2
+		</code></pre>
+	</section>
+	<section><h3>Factory Pattern - flexibility example</h3>
+		<pre><code rel="JS" class="js">
+			"use strict";
+			// aux constructors
+			function AudioPlayer(name){
+				this.name = name;
+				this.play = ()=>{
+					console.log(`${this.name} is playing as Audio!`);
+				}
+			}
+			function VideoPlayer(name){
+				this.name = name;
+				this.play = ()=>{
+					console.log(`${this.name} is playing as Video!`);
+				}
+			}
+
+			// the factory
+			function mediaPlayerMaker(name) {
+				if(name.match(/\.(?:mp3|ogg|flack)$/i) ){
+					return new AudioPlayer(name);
+				}
+				if (name.match(/\.(?:mp4|avi|divx)$/i)) {
+					return new VideoPlayer(name);
+				}
+			}
+
+			// the instancies
+			const player1 = mediaPlayerMaker('time_lapse.mp3');
+			const player2 = mediaPlayerMaker('micahel_nyman_band_live.avi');
+
+			// the usage
+			player1.play();
+			player2.play();
+
+			// time_lapse.mp3 is playing as Audio!
+			// micahel_nyman_band_live.avi is playing as Video!
+		</code></pre>
+	</section>
+	<section style="font-size: .8em"><h3>The Factory as mechanism to enforce encapsulation</h3>
+		<dl class="fa">
+			<dt>As we saw, the only way to enforce encapsulation in JavaScript is by function scopes and closures </dt>
+			<dt>And Factory is just a function!</dt>
+		</dl>
+		<pre><code rel="JS" class="js">
+			"use strict";
+			var objFactory = function(name){
+				// private members
+				var name = name;
+				// public
+				var obj = {
+					sayName: () =>console.log(`I'm object: ${name}`),
+				};
+
+				return obj;
+			}
+
+			var obj1 = objFactory('Object 1');
+			obj1.sayName();
+			console.log(`obj1.name: ${obj1.name}`);
+			// I'm object: Object 1
+			// obj1.name: undefined
+		</code></pre>
+	</section>
+	<section><h3>Factory Pattern: Pros&Cons</h3>
+		<dl class="fa">
+			<dt>Pros</dt>
+			<dd>Great flexibility and implementation independence.</dd>
+			<dd>Can create objects as literal, by constructor, by <code>Object.create()</code></dd>
+			<dd></dd>
+			<dt>Cons</dt>
+			<dd>Not familiar for "classical" OOP programmers</dd>
+		</dl>
+	</section>
+</section>
+<section><h2>The Constructor Pattern</h2>
+	<section><h2>Overview</h2>
+		<dl class="fa">
+			<dt>JavaScript uses special functions called <span class="note">constructor functions</span> to define objects and their features</dt>
+			<dt>JavaScript emulates object classes via constructor functions</dt>
+		</dl>
+	</section>
+	<section><h2>Overview</h2>
+		<dl class="fa">
+			<dt class="note">Constructor definition is like an ordinary function. The difference is that it have to be invoked with <code>new</code> keyword!</dt>
+			<dt>The naming convention for a constructor function is to start it with <b>capital letter</b> - this convention is used to make constructor functions easier to recognize in code.</dt>
+		</dl>
+	</section>
+	<section><h3>Example</h3>
+		<pre><code rel="JS" class="js">
+			var CarConstructor = function(model, year){
+				this.model = model;
+				this.year = year;
+			}
+
+			var ford = new CarConstructor('Ford', 2000);
+			var bmw = new CarConstructor('BMW', 2005);
+		</code></pre>
+	</section>
+	<section><h3>Example</h3>
+		<pre><code rel="JS">
+			// the Constructor Function:
+			var AppleConstructor = function( color, prices ){
+				console.log("I'm the AppleConstructor!");
+				this.color = color;
+				this.prices = prices;
+
+				this.calcMinPrice = function(){
+					return  Math.min( ...this.prices ); // from ES6
+				};
+				this.calcMaxPrice = function(){
+					return  Math.max( ...this.prices ); // from ES6
+				};
+			}
+
+			// objects constructing:
+			var apple1 = new AppleConstructor("red", [3.5, 2, 2.5]);
+			var appleN = new AppleConstructor("green", [1.80, 2.10, 2.40]);
+
+			// objects usage:
+			console.log( "apple1 min price: ", apple1.calcMinPrice());
+		</code></pre>
+	</section>
+	<section><h3>Constructor Function: Pros&Cons</h3>
+		<dl class="fa">
+			<dt>Pros</dt>
+			<dd>Easy to create multiple instances.</dd>
+			<dt>Cons</dt>
+			<dd><code>new</code> and <code>this</code> problems!</dd>
+		</dl>
+	</section>
+</section>
+<section><h2>The Object.create() method</h2>
+	<p>The <code>Object.create()</code> method creates a new object with the specified prototype object and properties.</p>
+	<p>Object prototypes are discussed further.</p>
+	<a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/create">Object.create()</a>
+</section>
+
+<section style="font-size: .8em"><h2>Exercises</h2>
+	<section><h3>The Factory Pattern - exercise (smartLogger)</h3>
+		<dl class="fa">
+			<dt>TASK: implement a <code>logger</code> object, whose methods <code>log()</code> and <code>dir()</code> works on top of the standard <code>console</code> methods, but log a message if the script is running under developers/test environment, and outputs nothing, if the script is started on production environment.
+			<dt>Tips: you can simulate a development or production environment by using the simple  <a href="https://www.npmjs.com/package/live-server">live-server</a>. Start it with two instances on different posts and test your logger on them </dt>
+		</dl>
+	</section>
+</section>
+
+
+<section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
+	 <p>These slides are based on</p>
+	 <p>customised version of </p>
+	 <p><a href="http://hakim.se/">Hakimel</a>'s <a href="http://lab.hakim.se/reveal-js">reveal.js</a></p>
+	 <p>framework</p>
+</section>
+<!--
+########################################################
+##################### SLIDES END   #####################
+########################################################
+-->
+		</div>
+	</div>
+	<!-- Custom processing -->
+	<script src="../../../outfit/js/slides.js"></script>
+	<!-- external scripts -->
+	<script src="../../../lib/reveal.js/lib/js/head.min.js"></script>
+	<script src="../../../lib/reveal.js/js/reveal.js"></script>
+
+	<!-- init reveal -->
+	<script>
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		var highlightjsTabSize = '  ';
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			slideNumber: 'c/t',
+			keyboard: true,
+			history: true,
+
+			// display control
+			// center: true,
+			// width: '100%',
+			// height: '100%',
+			// // Factor of the display size that should remain empty around the content
+			// margin: 0.1,
+
+			// The "normal" size of the presentation, aspect ratio will be preserved
+			// when the presentation is scaled to fit different resolutions. Can be
+			// specified using percentage units.
+			width: 960,
+			height: 700,
+
+			// Factor of the display size that should remain empty around the content
+			margin: 0.1,
+
+			// Bounds for smallest/largest possible scale to apply to content
+			minScale: 0.2,
+			maxScale: 1.5,
+
+			// slide transition
+			transition: 'concave', // none/fade/slide/convex/concave/zoom
+			// shift+maous click to zoom in/out element
+			zoomKey: 'ctrl',
+			// theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+			// transition: Reveal.getQueryHash().transition || 'default'
+			// Optional reveal.js plugins
+			dependencies: [
+				{ src: '../../../lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				{ src: '../../../lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../../lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../../lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.configure({tabReplace: highlightjsTabSize}); hljs.initHighlightingOnLoad(); } },
+				{ src: '../../../lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
+				{ src: '../../../lib/reveal.js/plugin/notes/notes.js', async: true }
+			]
+		});
+	</script>
+	<!-- linkedin badge -->
+	<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+</body>
+</html>
