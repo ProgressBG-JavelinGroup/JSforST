@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>ReferenceTypesOverview</title>
+	<title>UnderstandingObjects</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -44,7 +44,7 @@
 ##################### SLIDES START #####################
 ########################################################
 -->
-<section><h1>Reference Types Overview</h1></section>
+<section><h1>Understanding Objects in JavaScript</h1></section>
 <section data-transition="zoom">
 	<section>
 		<div class="copyright">
@@ -71,167 +71,8 @@
 	</section>
 </section>
 
-<section><h2>Arrays in JavaScript</h2>
-	<section><h3>Overview</h3>
-		<dl class="fa">
-			<dt>Arrays are regular objects, which keys are integers, and for which the 'length' property is defined.</dt>
-			<dt>Neither the length of a JavaScript array nor the types of its elements are fixed.</dt>
-			<dt class="note">Arrays cannot use strings as element indexes</dt>
-			<dt>JavaScript arrays are <span class="note">zero-indexed</span></dt>
-		</dl>
-	</section>
-	<section><h3>Examples</h3>
-		<pre><code rel="JS" class="js">
-			var colors = ['red', 'green', 'blue'];
-			console.log(typeof colors); // object
-		</code></pre>
-		<pre><code rel="JS" class="js">
-			// Array values can be of any type:
-			var userData = [ 24, 'Bulgaria', {avatar:'avatar245.png'}];
-		</code></pre>
-	</section>
-	<section><h3>Accessing array elements</h3>
-		<dl class="fa">
-			<dt>The first element of an array is at index 0</dt>
-			<dt>The last element is at the index: <code>arr.length-1</code></dt>
-		</dl>
-		<pre><code rel="JS" class="js">
-			var colors = ['red', 'green', 'blue'];
-			console.log( colors[1] ); // 'green'
 
-			// add new element:
-			colors[3] = 'black';
-			console.log(colors);
-			// (4) ["red", "green", "blue", "black"]
-		</code></pre>
-	</section>
-</section>
-<section><h2>Objects in JavaScript</h2>
-	<section><h3>Overview</h3>
-		<dl class="fa">
-			<dt>In JavaScript, objects can be seen as a collection of properties. Or as a mapping between keys and values.</dt>
-			<dt>Property names (the keys) can be either a String or a Symbol value. If they are not, JavaScript tries to typecast them.</dt>
-			<dt>Property values (the values) can be values of <span class="note">any type</span>, including other objects</dt>
-			<dt>JavaScript objects can be used to implement  associative array/dictionary/hashmaps data structures.</dt>
-		</dl>
-	</section>
-	<section><h3>Example</h3>
-		<pre><code rel="JS" class="js">
-			var point = {
-				x: 10,
-				y: 10,
-				draw: function(){
-					// do something to draw the point
-				}
-			}
-			console.log(typeof point); // object
-		</code></pre>
-	</section>
-	<section><h3>Accessing object properties</h3>
-		<dl class="fa">
-			<dt>Dot notation</dt>
-			<dt>Square bracket notation</dt>
-		</dl>
-	</section>
-	<section><h3>The Dot notation</h3>
-		<pre><code rel="Syntax" class="js">
-			object.property
-		</code></pre>
-		<p class="note">Property must be a valid identifier!</p>
-		<pre><code rel="JS" class="js">
-			var point = {};
 
-			// set object property:
-			point.x = 10;
-
-			// gat object property:
-			var x = point.x;
-
-			// example for invalid property name
-			point.2; // SyntaxError: Unexpected number
-		</code></pre>
-	</section>
-	<section><h3>The Square brackets notation</h3>
-		<pre><code rel="Syntax" class="js">
-			object['property']
-		</code></pre>
-		<p class="note" style="font-size: .8em">The string does not have to be a valid identifier; it can have any value, like "42", or even " " (a space).</p>
-		<pre><code rel="JS" class="js">
-			var point = {};
-
-			// set object property:
-			point['x'] = 10;
-
-			var propName = 'x';
-
-			// gat object property:
-			var x = point[propName];
-
-			// next is also valid
-			point[2] = 10;
-
-			console.log(point);
-		</code></pre>
-	</section>
-	<section><h3>Methods</h3>
-		<dl class="fa">
-			<dt>In JavaScript <span class="note">methods</span> are object properties which value is a function!</dt>
-		</dl>
-	</section>
-</section>
-<section><h2>The Object object</h2>
-	<section>
-		<p>Every JavaScript object is created by the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a> build in object and inherits its properties and methods.</p>
-	</section>
-</section>
-<section><h2>The Array object</h2>
-	<section>
-		<dl class="fa">
-			<dt>Arrays in JavaScript are created by the build in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array object</a> and inherits its properties and methods. </dt>
-		</dl>
-	</section>
-</section>
-<section><h2>The Date object</h2>
-	<section>
-		<dl class="fa">
-			<dt>Dates/times in JavaScript are represented by the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a> build in object</dt>
-			<dt>Date objects are based on a time value that is the number of milliseconds since 1 January, 1970 UTC.</dt>
-		</dl>
-	</section>
-	<section>
-		<dl class="fa">
-			<dt>Unlike other JavaScript object types, JavaScript Date objects have no literal syntax.</dt>
-			<dt>I.e. you always have to create a new Date object by the constructor</dt>
-		</dl>
-		<pre><code rel="JS" class="js">
-			var now = new Date();
-			console.log(`now is: ${now}`);
-
-		</code></pre>
-	</section>
-	<section>
-		<p>All Date instances inherit from <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/prototype">Date.prototype</a></p>
-		<pre><code rel="JS" class="js">
-			var now = new Date();
-			console.log( now.getFullYear() );
-		</code></pre>
-	</section>
-</section>
-<section><h2>The RegExp Object</h2>
-	<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp">RegExp</a></p>
-	<p>Regular expressions in JavaScript will be discussed deeply in next sections</p>
-</section>
-<section><h2>The Function object</h2>
-	<dl class="fa">
-		<dt class="note">In JavaScript every function is actually a Function object.</dt>
-		<dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function object</a></dt>
-		<dt>Functions in JavaScript will be discussed deeply in next sections</dt>
-	</dl>
-</section>
-<section><h2>Primitive boxing: the Number, Strung and Boolean Wrappers</h2>
-	<p>Except for null and undefined, all primitive values have object equivalents that wrap around the primitive values.</p>
-	<p><a href="https://developer.mozilla.org/en-US/docs/Glossary/Primitive#Primitive_wrapper_objects_in_JavaScript">Primitive wrapper objects in JavaScript</a></p>
-</section>
 
 <section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
 	 <p>These slides are based on</p>
