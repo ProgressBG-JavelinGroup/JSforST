@@ -1,10 +1,15 @@
-function mainFunction( cb ){
-	console.log('mainFunction() is invoked');
-	cb();
+// main
+var colors = ['red', 'green', 'blue'];
+var index = 2;
+var colorFunctions = [];
+
+for(let i = 0; i<colors.length; i++){
+		console.log(`1: i = ${i}`);
+		colorFunctions[i] = function() {
+			console.log(`2: i = ${i}`);  /// i
+			console.log(`color: ${colors[i]}`);
+		}
 }
 
-function callback() {
-	console.log('callback() is invoked');
-}
-
-mainFunction( callback);
+colorFunctions[1](); // red
+// colorFunctions[2](); // red

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>DOMTraverse</title>
+</head>
+<body>
+	<ul>
+		<li>Item 1</li>
+		<li>Item 2</li>
+		<li class="red">Item 3</li>
+		<li>Item 4</li>
+		<li>Item 5</li>
+		<li class="red">Item 6</li>
+		<li>Item 7</li>
+	</ul>
+	<section>
+		<div>
+			<div>
+				<div>
+					<p class="red">Paint me in red</p>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+<script type="text/javascript">
+	function traverseDOM(node) {
+	  //*** the do what we want to do part ***//
+	  if (node.className == "red") {
+		node.style.color = "red";
+	  }
+
+	  //*** the recursion (traverse) part ***//
+	  var childrens = node.childNodes;
+	  // if the node has no children, the recursion will end!
+	  // if it has - do the same for each child
+	  for (var i = 0, len = childrens.length; i < len; i++) {
+		// we'll process only element node nodes
+		if( childrens[i].nodeType == 1 ){
+		  traverseDOM(childrens[i]);
+		}
+	  }
+	}
+
+	traverseDOM(document.body);
+
+</script>
+</html>

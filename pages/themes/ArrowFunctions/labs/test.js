@@ -1,7 +1,15 @@
-var isEven = x=>x%2 == 0;
-console.log( isEven(3));
+var obj = {
+	userName: 'obj1',
+	f: function () {
+		console.log(this.userName);
+	},
+	a:()=>{
+		console.log(`this: ${this}`);
+		console.log(this.userName);
+	}
+}
 
-var btnNode = document.getElementsByTagName('button')[0];
-btnNode.addEventListener('click', event=>{
-	console.log('Button was clicked!');
-})
+
+
+obj.f();
+obj.a();

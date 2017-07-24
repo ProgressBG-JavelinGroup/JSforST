@@ -1,8 +1,9 @@
 function main() {
 	var y = 99;
 
-	function sum(x, y=y){
-		// var y = 30;
+	function sum(x){
+		// var y = 1;
+		var y;
 		console.log(x+y);
 	}
 
