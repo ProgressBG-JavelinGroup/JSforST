@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+	<button>Click me</button>
+	<div id="output"></div>
+	<script type="text/javascript">
+		var myApp = {
+			DOMcache: {
+				btnNode:document.getElementsByTagName('button')[0],
+				outputNode:document.getElementById('output'),
+			},
+			clickHandler: function(){
+				this.DOMcache.outputNode.innerHTML = "Iva";
+			},
+			init: function(){
+				this.DOMcache.btnNode.addEventListener( 'click', this.clickHandler );
+			}
+		}
+
+		myApp.init();
+	</script>
+</body>
+</html>
